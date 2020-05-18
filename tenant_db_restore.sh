@@ -22,12 +22,12 @@ if [[ $make_migrations =~ ^([yY][eE][sS]|[yY])$ ]]; then
 fi
 
 
-docker-compose down
-sleep 3
-docker system prune
-docker volume rm neutron_postgres-data
-docker-compose up -d
-sleep 5
+#docker-compose down
+#sleep 3
+#docker system prune
+#docker volume rm neutron_postgres-data
+#docker-compose up -d
+#sleep 5
 
 if $delete_migrations; then
   find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
@@ -37,4 +37,4 @@ fi
 python manage.py migrate
 python manage.py create_org
 python manage.py loaddata locations-fixture.json
-python manage.py tenant_command loaddata tenant-fixture.json
+python manage.py tenant_command loaddata tenant-fixture.json --schema neutron
